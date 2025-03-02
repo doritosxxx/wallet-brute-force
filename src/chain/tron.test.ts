@@ -1,4 +1,4 @@
-import { mnemonicToTronAddress } from './mnemonicToTronAddress';
+import { mnemonicToTronAddress } from './tron';
 
 
 const MNEMONIC_TO_ADDRESS = [

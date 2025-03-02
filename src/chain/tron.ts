@@ -1,10 +1,10 @@
 import bs58check from 'bs58check';
 
-import { mnemonicToSeed } from './transformers/mnemonicToSeed';
-import { seedToPrivateKey } from './transformers/seedToPrivateKey';
-import { privateKeyToPublicKey } from './transformers/privateKeyToPublicKey';
-import { publicKeyToAddress } from './transformers/publicKeyToAddress';
-import { entropyToMnemonic } from './transformers/entropyToMnemonic';
+import { mnemonicToSeed } from '../transformers/mnemonicToSeed';
+import { seedToPrivateKey } from '../transformers/seedToPrivateKey';
+import { privateKeyToPublicKey } from '../transformers/privateKeyToPublicKey';
+import { publicKeyToAddress } from '../transformers/publicKeyToAddress';
+import { entropyToMnemonic } from '../transformers/entropyToMnemonic';
 
 function binaryAddressToTronAddress(address: Buffer) {
     const bytes = Buffer.alloc(21);
