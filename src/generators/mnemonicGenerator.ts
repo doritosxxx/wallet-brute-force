@@ -8,25 +8,28 @@ export function createMnemonicGenerator(template: MnemonicTemplate): Generator<s
         length *= BigInt(variants.length);
     }
 
+    const chunks: string[] = template.map(variants => variants[0]);
+
+    function* iterate(i: number = 0) {
+        for (const variant of template[i]) {
+            chunks[i] = variant;
+
+            if (i === chunks.length - 1) {
+                current++;
+                yield chunks.join(" ");
+            } else {
+                yield* iterate(i + 1);
+            }
+        }
+    }
+
     return {
         get current() {
             return current;
         },
+
         length,
 
-        [Symbol.iterator]: function* () {
-            const chunks: string[] = template.map(variants => variants[0]);
-
-            for (let i = 0; i < chunks.length; ++i) {
-                const variants: string[] = template[i];
-                for (let j = 0; j < variants.length; ++j) {
-                    chunks[i] = variants[j];
-
-                    if (i + 1 === chunks.length) {
-                        yield chunks.join(" ");
-                    }
-                }
-            }
-        },
+        [Symbol.iterator]: iterate,
     }
 }
