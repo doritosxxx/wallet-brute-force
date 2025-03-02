@@ -1,4 +1,4 @@
-import { mnemonicToAddress } from '../mnemonicToAddress';
+import { mnemonicToTronAddress } from './mnemonicToTronAddress';
 
 
 const MNEMONIC_TO_ADDRESS = [
@@ -6,10 +6,10 @@ const MNEMONIC_TO_ADDRESS = [
     ["keep owner net brave master flash blame trim summer weapon quality hazard", "TUpfHgJkFwL7kgPyqTqTZNQ7LtFgnAk6nX"]
 ];
 
-describe("mnemonicToAddress", () => {
-    test("mnemonicToAddress", async () => {
+describe("mnemonic to tron address", () => {
+    test("mnemonicToTronAddress", async () => {
         for (const [mnemonic, expectedAddress] of MNEMONIC_TO_ADDRESS) {
-            const address = await mnemonicToAddress(mnemonic);
+            const address = await mnemonicToTronAddress(mnemonic);
 
             expect(address).toBe(expectedAddress);
         }

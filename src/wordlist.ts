@@ -1,4 +1,4 @@
-export const wordlist = [
+const WORDLIST = [
     "abandon",
     "ability",
     "able",
@@ -2047,6 +2047,26 @@ export const wordlist = [
     "zero",
     "zone",
     "zoo",
-];
+] as const;
 
-export const wordIndex = Object.fromEntries(wordlist.map((word, index) => [index, word]))
+export const wordlist: readonly string[] = WORDLIST;
+
+export const wordIndex = Object.fromEntries(wordlist.map((word, index) => [index, word]));
+
+export type BIP39Word = typeof WORDLIST[number];
+
+export const isBIP39Word = (word: string): word is BIP39Word => {
+    return wordlist.includes(word);
+}
+
+export const wordlistByLength = wordlist.reduce((map, word) => {
+    const length = word.length;
+
+    if (!map[length]) {
+        map[length] = [];
+    }
+
+    map[length].push(word);
+
+    return map;
+}, {} as Record<number, string[]>)
