@@ -46,8 +46,13 @@ export function setWordToEntropy(entropy: Buffer, word: number, wordPosition: nu
     let offset = wordPosition * 11;
 
     for (let bit = 0; bit < 11; bit++) {
+        const mask = 1 << (7 - (offset % 8));
+        const maskInverted = mask ^ 0xFF;
+
         if (word & (1 << (10 - bit))) {
-            entropy[offset >> 3] |= (1 << (7 - (offset % 8)));
+            entropy[offset >> 3] |= mask;
+        } else {
+            entropy[offset >> 3] &= maskInverted;
         }
         offset++;
     }
