@@ -1,5 +1,5 @@
 import { Mnemonic } from 'ethers';
-import { entropyToMnemonic } from './entropyToMnemonic';
+import { entropyToMnemonic, mnemonicToEntropy } from './entropyToMnemonic';
 
 const ENTROPY_TO_MNEMONIC: [Buffer, string][] = [
     [
@@ -22,4 +22,13 @@ describe("entropy to mnemonic", () => {
             expect(actualMnemonic).toBe(mnemonic);
         }
     })
+});
+
+describe("mnemonic to entropy", () => {
+    test("mnemonicToEntropy", async () => {
+        for (const [entropy, mnemonic] of ENTROPY_TO_MNEMONIC) {
+            const actualEntropy = await mnemonicToEntropy(mnemonic);
+            expect(actualEntropy.toString('hex')).toBe(entropy.toString('hex'));
+        }
+    });
 });

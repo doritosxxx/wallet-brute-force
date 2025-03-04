@@ -1,6 +1,6 @@
 import { randomBytes } from 'crypto';
-import { entropyToTronAddress } from '../mnemonicToTronAddress';
-import { formatDate, formatSeconds } from './utils/format';
+import { entropyToTronAddress } from '../chain/tron';
+import { formatDate, formatSeconds } from '../utils/format';
 
 const combinations: bigint[] = new Array(13);
 combinations[0] = 1n;

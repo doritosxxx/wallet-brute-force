@@ -1,7 +1,7 @@
 import { MnemonicTemplate } from "../mnemonicTemplate";
-import { Generator } from './generator'
+import { BruteForceGenerator } from './generator'
 
-export function createMnemonicGenerator(template: MnemonicTemplate): Generator<string> {
+export function createMnemonicGenerator(template: MnemonicTemplate): BruteForceGenerator<string> {
     let current = 1n;
     let length = 1n;
     for (const variants of template) {
@@ -10,7 +10,7 @@ export function createMnemonicGenerator(template: MnemonicTemplate): Generator<s
 
     const chunks: string[] = template.map(variants => variants[0]);
 
-    function* iterate(i: number = 0) {
+    function* iterate(i: number = 0): Generator<string> {
         for (const variant of template[i]) {
             chunks[i] = variant;
 

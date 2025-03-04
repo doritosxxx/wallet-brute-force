@@ -2051,7 +2051,7 @@ const WORDLIST = [
 
 export const wordlist: readonly string[] = WORDLIST;
 
-export const wordIndex = Object.fromEntries(wordlist.map((word, index) => [index, word]));
+export const wordIndex = Object.fromEntries(WORDLIST.map((word, index) => [word, index])) as Record<BIP39Word, number>;
 
 export type BIP39Word = typeof WORDLIST[number];
 

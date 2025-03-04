@@ -1,4 +1,4 @@
-export interface Generator<T> extends Iterable<T> {
-    current: BigInt;
-    length: BigInt;
+export interface BruteForceGenerator<T> extends Iterable<T> {
+    current: bigint;
+    length: bigint;
 }

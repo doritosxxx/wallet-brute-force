@@ -1,5 +1,7 @@
-export function formatDate(ms: bigint) {
-    let current = ms;
+export function formatDate(ms: number);
+export function formatDate(ms: bigint);
+export function formatDate(ms: bigint | number) {
+    let current = BigInt(ms);
     const dateFactors: [string, bigint | number][] = [
         ['ms', 1000n],
         ['s', 60n],

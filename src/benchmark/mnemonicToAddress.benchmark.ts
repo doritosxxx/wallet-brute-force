@@ -1,5 +1,5 @@
-import { mnemonicToTronAddress } from '../mnemonicToTronAddress';
-import { formatDate, formatSeconds } from './utils/format';
+import { mnemonicToTronAddress } from '../chain/tron';
+import { formatDate, formatSeconds } from '../utils/format';
 
 import { randomMnemonic } from './utils/randomMnemonic'
 
