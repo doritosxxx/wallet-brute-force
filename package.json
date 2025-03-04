@@ -4,7 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "tsx src/index.ts",
+        "start:tsx": "tsx src/index.ts",
+        "start:deno": "deno --unstable-sloppy-imports --allow-env --allow-read --allow-ffi src/index.ts",
         "test": "jest",
         "benchmark:mnemonic": "tsx src/benchmark/mnemonicToAddress.benchmark.ts",
         "benchmark:entropy": "tsx src/benchmark/entropyToAddress.benchmark.ts"

@@ -1,3 +1,4 @@
+import { Buffer } from "node:buffer"
 import bs58check from 'bs58check';
 
 import { mnemonicToSeed } from '../transformers/mnemonicToSeed';

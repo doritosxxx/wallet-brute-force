@@ -1,3 +1,4 @@
+import { Buffer } from "node:buffer"
 import secp256k1 from 'secp256k1'
 
 export function privateKeyToPublicKey(privateKey: Buffer) {

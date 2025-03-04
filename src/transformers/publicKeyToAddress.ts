@@ -1,3 +1,4 @@
+import { Buffer } from "node:buffer"
 import { createKeccak } from 'hash-wasm'
 
 export async function publicKeyToAddress(publicKey: Buffer) {

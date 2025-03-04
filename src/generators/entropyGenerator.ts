@@ -1,3 +1,5 @@
+import { Buffer } from "node:buffer"
+
 import { MnemonicTemplate } from "../mnemonicTemplate";
 import { BruteForceGenerator } from "./generator";
 import { setWordToEntropy } from '../transformers/entropyToMnemonic';

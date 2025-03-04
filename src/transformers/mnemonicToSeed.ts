@@ -1,3 +1,4 @@
+import { Buffer } from "node:buffer"
 import { Mnemonic } from "ethers";
 
 import { createSHA512, pbkdf2 } from 'hash-wasm';
