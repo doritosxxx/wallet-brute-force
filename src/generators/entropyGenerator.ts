@@ -8,12 +8,9 @@ import { wordIndex } from "../wordlist";
 export function createEntropyGenerator(wordTemplate: MnemonicTemplate): BruteForceGenerator<Buffer> {
     const template = wordTemplate.map(variants => variants.map(word => wordIndex[word]));
 
-    const uniqueLastWordVariants = [...new Set(template.at(-1)!.map(word => word & 0b11111110000))]
+    const uniqueLastWordVariants = [...new Set(template.at(-1)!.map(word => word & 0b11111110000))];
 
     template[template.length - 1] = uniqueLastWordVariants;
-
-    // const lastWordVariants = indexTemplate.at(-1);
-    // const uniqueLastWordVariants
 
     let current = 1n;
     let length = 1n;

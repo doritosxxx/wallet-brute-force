@@ -43,18 +43,36 @@ export async function entropyToMnemonic(entropy: Buffer): Promise<string> {
 }
 
 export function setWordToEntropy(entropy: Buffer, word: number, wordPosition: number) {
-    let offset = wordPosition * 11;
+    let end = (wordPosition + 1) * 11;
+    let remainingBits = 11;
 
-    for (let bit = 0; bit < 11; bit++) {
-        const mask = 1 << (7 - (offset % 8));
-        const maskInverted = mask ^ 0xFF;
+    const offsetWithinByte = end % 8;
+    // consume last dangling byte.
+    if (offsetWithinByte !== 0) {
+        const lowerMask = (1 << offsetWithinByte) - 1;
+        const byteIndex = ((end - 1) >> 3);
 
-        if (word & (1 << (10 - bit))) {
-            entropy[offset >> 3] |= mask;
-        } else {
-            entropy[offset >> 3] &= maskInverted;
-        }
-        offset++;
+        const byteLowerMask = (1 << (8 - offsetWithinByte)) - 1;
+
+        entropy[byteIndex] = ((word & lowerMask) << (8 - offsetWithinByte)) | entropy[byteIndex] & byteLowerMask;
+
+        end -= offsetWithinByte;
+        remainingBits -= offsetWithinByte;
+        word >>= offsetWithinByte;
+    }
+
+    while (remainingBits !== 0) {
+        console.log({ remainingBits })
+        const length = Math.min(8, remainingBits);
+        const lowerMask = (1 << length) - 1;
+        const upperMask = lowerMask ^ 0xFF;
+        const byteIndex = ((end - 1) >> 3);
+
+        entropy[byteIndex] = entropy[byteIndex] & upperMask | word & lowerMask;
+
+        end -= length;
+        remainingBits -= length;
+        word >>= length;
     }
 }
 
