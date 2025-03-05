@@ -62,7 +62,6 @@ export function setWordToEntropy(entropy: Buffer, word: number, wordPosition: nu
     }
 
     while (remainingBits !== 0) {
-        console.log({ remainingBits })
         const length = Math.min(8, remainingBits);
         const lowerMask = (1 << length) - 1;
         const upperMask = lowerMask ^ 0xFF;
