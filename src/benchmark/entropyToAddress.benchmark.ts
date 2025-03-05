@@ -1,4 +1,4 @@
-import { randomBytes } from 'crypto';
+import { randomBytes } from 'node:crypto';
 import { entropyToTronAddress } from '../chain/tron';
 import { formatDate, formatSeconds } from '../utils/format';
 
