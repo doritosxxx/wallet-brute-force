@@ -8,8 +8,8 @@
         "deno": "deno --unstable-sloppy-imports --allow-env --allow-read --allow-ffi",
         "start:deno": "pnpm deno src/index.ts",
         "test": "jest",
-        "benchmark:mnemonic": "pnpm deno src/benchmark/mnemonicToAddress.benchmark.ts",
-        "benchmark:entropy": "pnpm deno src/benchmark/entropyToAddress.benchmark.ts"
+        "benchmark:mnemonic": "tsx src/benchmark/mnemonicToAddress.benchmark.ts",
+        "benchmark:entropy": "tsx src/benchmark/entropyToAddress.benchmark.ts"
     },
     "keywords": [],
     "author": "",
