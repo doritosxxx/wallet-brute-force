@@ -2,7 +2,7 @@ import { MnemonicTemplate } from "../mnemonicTemplate";
 import { BruteForceGenerator } from './generator'
 
 export function createMnemonicGenerator(template: MnemonicTemplate): BruteForceGenerator<string> {
-    let current = 1n;
+    let next = 1n;
     let length = 1n;
     for (const variants of template) {
         length *= BigInt(variants.length);
@@ -15,7 +15,7 @@ export function createMnemonicGenerator(template: MnemonicTemplate): BruteForceG
             chunks[i] = variant;
 
             if (i === chunks.length - 1) {
-                current++;
+                next++;
                 yield chunks.join(" ");
             } else {
                 yield* iterate(i + 1);
@@ -24,8 +24,8 @@ export function createMnemonicGenerator(template: MnemonicTemplate): BruteForceG
     }
 
     return {
-        get current() {
-            return current;
+        get next() {
+            return next;
         },
 
         length,

@@ -1,4 +1,4 @@
 export interface BruteForceGenerator<T> extends Iterable<T> {
-    current: bigint;
+    next: bigint;
     length: bigint;
 }

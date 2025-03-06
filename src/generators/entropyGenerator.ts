@@ -12,7 +12,7 @@ export function createEntropyGenerator(wordTemplate: MnemonicTemplate): BruteFor
 
     template[template.length - 1] = uniqueLastWordVariants;
 
-    let current = 1n;
+    let next = 1n;
     let length = 1n;
     for (const variants of template) {
         length *= BigInt(variants.length);
@@ -25,7 +25,7 @@ export function createEntropyGenerator(wordTemplate: MnemonicTemplate): BruteFor
             setWordToEntropy(entropy, variant, i);
 
             if (i === template.length - 1) {
-                current++;
+                next++;
                 yield entropy;
             } else {
                 yield* iterate(i + 1);
@@ -34,8 +34,8 @@ export function createEntropyGenerator(wordTemplate: MnemonicTemplate): BruteFor
     }
 
     return {
-        get current() {
-            return current;
+        get next() {
+            return next;
         },
 
         length,
