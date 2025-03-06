@@ -5,7 +5,7 @@ import { mnemonicToSeed } from '../transformers/mnemonicToSeed';
 import { seedToPrivateKey } from '../transformers/seedToPrivateKey';
 import { privateKeyToPublicKey } from '../transformers/privateKeyToPublicKey';
 import { publicKeyToAddress } from '../transformers/publicKeyToAddress';
-import { entropyToMnemonic } from '../transformers/entropyToMnemonic';
+import { entropyToMnemonic, mnemonicToEntropy } from '../transformers/entropyToMnemonic';
 
 function binaryAddressToTronAddress(address: Buffer) {
     const bytes = Buffer.alloc(21);
@@ -16,6 +16,8 @@ function binaryAddressToTronAddress(address: Buffer) {
 }
 
 export async function mnemonicToTronAddress(mnemonic: string): Promise<string> {
+    // Check checksum integrity.
+    await mnemonicToEntropy(mnemonic, true);
     const seed = await mnemonicToSeed(mnemonic);
     const privateKey = seedToPrivateKey(seed, `m/44'/195'/0'/0/0`);
     const publicKey = privateKeyToPublicKey(privateKey);

@@ -1,19 +1,21 @@
 import { Buffer } from "node:buffer"
-import { Mnemonic } from "ethers";
+import { pbkdf2 } from "ethers";
 
-import { createSHA512, pbkdf2 } from 'hash-wasm';
-import { PBKDF2, algo } from 'crypto-js';
+import { createSHA512, pbkdf2 as pbkdf2_wasm } from 'hash-wasm';
 
 const mnemonicLiteral = new Uint8Array([109, 110, 101, 109, 111, 110, 105, 99]);
 
-export async function mnemonicToSeed(mnemonic: string) {
-    const seed = Mnemonic.fromPhrase(mnemonic).computeSeed()
+// Does not checks for checksum integrity.
+export async function mnemonicToSeed_fastest(mnemonic: string) {
+    const password = Buffer.from(mnemonic, "utf-8");
+    const seedHex = pbkdf2(password, mnemonicLiteral, 2048, 64, "sha512");
 
-    return Buffer.from(seed.slice(2), "hex");
+    // Could actually skip this.
+    return Buffer.from(seedHex.slice(2), "hex");
 }
 
-export async function mnemonicToSeedButReallySlow(mnemonic: string) {
-    const seed = await pbkdf2({
+export async function mnemonicToSeed_butReallySlow(mnemonic: string) {
+    const seed = await pbkdf2_wasm({
         password: mnemonic,
         salt: mnemonicLiteral,
         hashFunction: createSHA512(),
@@ -25,11 +27,4 @@ export async function mnemonicToSeedButReallySlow(mnemonic: string) {
     return Buffer.from(seed);
 }
 
-// export async function mnemonicToSeed2(mnemonic: string) {
-//     const seed = PBKDF2(mnemonic, "mnemonic", {
-//         iterations: 2048,
-//         hasher: algo.SHA512,
-//     });
-
-//     return Buffer.from(seed);
-// } 
+export const mnemonicToSeed = mnemonicToSeed_fastest;

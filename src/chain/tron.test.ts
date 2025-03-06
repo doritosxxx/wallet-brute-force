@@ -14,4 +14,10 @@ describe("mnemonic to tron address", () => {
             expect(address).toBe(expectedAddress);
         }
     });
+
+    it("should throw if checksum is incorrect", async () => {
+        const incorrectPhrase = "keep owner net brave master flash blame trim summer weapon quality zoo";
+
+        expect(mnemonicToTronAddress(incorrectPhrase)).rejects.toBeInstanceOf(Error);
+    });
 });
