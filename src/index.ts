@@ -6,14 +6,8 @@ import { entropyToTronAddress, mnemonicToTronAddress } from './chain/tron'
 import { formatDate } from './utils/format';
 import { entropyToMnemonic } from "./transformers/entropyToMnemonic";
 
-// zoo
 const phrase = "flame 5 kitchen recall child desk 4 weekend resource school venue ?";
 const targetAddress = "TGaVQqjm4zxYFkT1SM9P8frBA38jWdZR4D";
-
-// twt
-// const phrase = "keep owner net brave master flash blame trim summer weapon quality hazard";
-// const phrase = "keep owner net brave master flash blame 4 summer weapon quality hazard";
-// const targetAddress = "TUpfHgJkFwL7kgPyqTqTZNQ7LtFgnAk6nX"
 
 const REPORT_INTERVAL_MS = 10_000;
 
@@ -41,10 +35,10 @@ async function main_entropy() {
         if (now > nextReport) {
             nextReport = now + REPORT_INTERVAL_MS;
             const elapsed = now - start;
-            const addressPerSecond = 1000n * entropyGenerator.current / BigInt(elapsed);
-            const estimated = (entropyGenerator.length - entropyGenerator.current) * 1000n / addressPerSecond;
+            const addressPerSecond = 1000n * entropyGenerator.next / BigInt(elapsed);
+            const estimated = (entropyGenerator.length - entropyGenerator.next) * 1000n / addressPerSecond;
 
-            console.log(`[${entropyGenerator.current}/${entropyGenerator.length}] speed: ${addressPerSecond}a/s. elapsed: ${formatDate(elapsed)}. estimated: ${formatDate(estimated)}`);
+            console.log(`[${entropyGenerator.next}/${entropyGenerator.length}] speed: ${addressPerSecond}a/s. elapsed: ${formatDate(elapsed)}. estimated: ${formatDate(estimated)}`);
         }
     }
 }
@@ -63,10 +57,10 @@ async function main_mnemonic() {
         if (now > nextReport) {
             nextReport = now + REPORT_INTERVAL_MS;
             const elapsed = now - start;
-            const addressPerSecond = 1000n * mnemonicGenerator.current / BigInt(elapsed);
-            const estimated = (mnemonicGenerator.length - mnemonicGenerator.current) * 1000n / addressPerSecond;
+            const addressPerSecond = 1000n * mnemonicGenerator.next / BigInt(elapsed);
+            const estimated = (mnemonicGenerator.length - mnemonicGenerator.next) * 1000n / addressPerSecond;
 
-            console.log(`[${mnemonicGenerator.current}/${mnemonicGenerator.length}] speed: ${addressPerSecond}a/s. elapsed: ${formatDate(elapsed)}. estimated: ${formatDate(estimated)}`);
+            console.log(`[${mnemonicGenerator.next}/${mnemonicGenerator.length}] speed: ${addressPerSecond}a/s. elapsed: ${formatDate(elapsed)}. estimated: ${formatDate(estimated)}`);
         }
     }
 }
