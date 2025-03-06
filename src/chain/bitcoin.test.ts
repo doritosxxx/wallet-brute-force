@@ -4,7 +4,7 @@ const MNEMONIC_TO_ADDRESS = [
 ];
 
 describe.skip('mnemonic to bitcoin address', () => {
-    test.todo("correct phrases")
-})
+    test.todo("correct phrases");
+});
 
 export { }
