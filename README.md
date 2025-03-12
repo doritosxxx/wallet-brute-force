@@ -4,7 +4,7 @@ Node.js single threaded scripts for brute forcing mnemonic phrase for known wall
 
 The code written with performance in mind. It utilizes a lot of optimizations:
  - wasm hash library 
- - deno as node.js runtime
+ - deno as js runtime
  - brute-forcing by entropy 
  - hand-written and fine-tuned algorithms
 
